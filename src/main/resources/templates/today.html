@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>今日のやること</title>
+</head>
+<body>
+<h1>📅 今日の日付：<span th:text="${today}"></span></h1>
+
+<h2>✅ 今日のやること</h2>
+<ul>
+    <li th:each="task : ${tasks}">
+        <form th:action="@{/update}" method="post">
+            <input type="hidden" name="id" th:value="${task.id}" />
+            <input type="checkbox" name="done" th:checked="${task.done}" onchange="this.form.submit()">
+            <span th:text="${task.task}"></span><br>
+            <input type="text" name="comment" th:value="${task.comment}" placeholder="コメントを書く..." onchange="this.form.submit()">
+        </form>
+    </li>
+</ul>
+
+<h2>➕ 新しいやることを追加</h2>
+<form action="/add" method="post">
+    <input type="text" name="task" placeholder="やることを入力" required>
+    <button type="submit">追加</button>
+</form>
+
+<p><a href="/history">📅 過去の履歴を見る</a></p>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>年間目標の入力</title>
+</head>
+<body>
+<h1>🎯 年間目標の入力</h1>
+
+<form action="/goals/yearly" method="post">
+    <label for="goalYear">年：</label>
+    <input type="number" name="goalYear" id="goalYear" required><br><br>
+
+    <label for="be">Be（どうなりたいか）：</label><br>
+    <textarea name="be" id="be" rows="3" cols="50" required></textarea><br><br>
+
+    <label for="what">What（何を達成したいか）：</label><br>
+    <textarea name="what" id="what" rows="3" cols="50" required></textarea><br><br>
+
+    <button type="submit">保存して次へ</button>
+</form>
+
+<hr>
+<h2>📋 登録済みの年間目標一覧</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>年</th>
+        <th>Be（どうなりたいか）</th>
+        <th>What（何を達成したいか）</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="goal : ${yearlyGoals}">
+        <td th:text="${goal.id}"></td>
+        <td th:text="${goal.goalYear}"></td>
+        <td th:text="${goal.be}"></td>
+        <td th:text="${goal.what}"></td>
+        <td>
+            <a th:href="@{/goals/yearly/edit/{id}(id=${goal.id})}">編集</a>
+            |
+            <form th:action="@{/goals/yearly/delete/{id}(id=${goal.id})}" method="post" style="display:inline;">
+                <button type="submit" onclick="return confirm('本当に削除しますか？');">削除</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>履歴一覧</title>
+</head>
+<body>
+<h1>📅 過去の記録</h1>
+
+<ul>
+    <li th:each="date : ${dates}">
+        <a th:href="@{'/history/' + ${date}}" th:text="${date}"></a>
+    </li>
+</ul>
+
+<p><a href="/">今日のやることに戻る</a></p>
+</body>
+</html>
