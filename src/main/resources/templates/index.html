@@ -1,10 +1,71 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>Habit App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Habit App - ホーム</title>
+    <style>
+        :root { --fg:#1f2937; --muted:#6b7280; --bg:#f8fafc; --card:#ffffff; --accent:#6366f1; }
+        *{box-sizing:border-box}
+        body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,Apple Color Emoji,Segoe UI Emoji;
+             color:var(--fg);background:var(--bg);}
+        .wrap{max-width:960px;margin:0 auto;padding:24px;}
+        header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+        h1{font-size:28px;margin:0}
+        .sub{color:var(--muted);font-size:14px}
+        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+        .card{background:var(--card);border:1px solid #e5e7eb;border-radius:12px;padding:20px;
+              transition:transform .08s ease, box-shadow .08s ease;}
+        .card:hover{transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,.06)}
+        .card h2{margin:0 0 8px;font-size:18px}
+        .card p{margin:0 0 14px;color:var(--muted);font-size:14px;line-height:1.5}
+        .btn{display:inline-block; padding:10px 14px; border-radius:10px; text-decoration:none;
+             background:var(--accent); color:white; font-weight:600;}
+        .links{margin-top:28px; color:var(--muted); font-size:14px}
+        .links a{color:var(--accent); text-decoration:none}
+    </style>
 </head>
 <body>
-<h1>Hello, Habit Tracker!</h1>
+<div class="wrap">
+    <header>
+        <div>
+            <h1>Habit App</h1>
+            <div class="sub">年間 → 四半期 → 月間 → 今日 をつないで、目標を日々の行動へ。</div>
+        </div>
+    </header>
+
+    <div class="grid">
+        <div class="card">
+            <h2>年間目標</h2>
+            <p>1年の「Be / What」を決めて、全体の方向性を固めます。</p>
+            <a class="btn" href="/goals/yearly">年間目標を開く</a>
+        </div>
+
+        <div class="card">
+            <h2>四半期目標</h2>
+            <p>年の目標を Q1〜Q4 にブレイクダウン。進捗と優先度を見直します。</p>
+            <!-- 年の選択から遷移するため、一覧ページへの導線を案内 -->
+            <a class="btn" href="/goals/yearly">四半期へ進む</a>
+        </div>
+
+        <div class="card">
+            <h2>月間目標</h2>
+            <p>四半期のフォーカスをさらに月単位へ。コメントで意図も残せます。</p>
+            <a class="btn" href="/goals/yearly">月間へ進む</a>
+        </div>
+
+        <div class="card">
+            <h2>今日の目標</h2>
+            <p>今日のタスクをチェックし、完了・コメントをサクッと更新。</p>
+            <a class="btn" href="/today">今日のタスクを見る</a>
+        </div>
+    </div>
+
+    <div class="links">
+        ショートカット:
+        <a href="/goals/yearly">/goals/yearly</a> ・
+        <a href="/today">/today</a>
+    </div>
+</div>
 </body>
 </html>
