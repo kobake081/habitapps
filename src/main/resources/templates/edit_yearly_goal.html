@@ -1,29 +1,12 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>年間目標の編集</title>
-</head>
-<body>
-<h1>✏️ 年間目標の編集</h1>
-
-<form th:action="@{/goals/yearly/update}" method="post">
-  <input type="hidden" name="id" th:value="${goal.id}" />
-
-  <label for="goalYear">年：</label>
-  <input type="number" name="goalYear" id="goalYear" th:value="${goal.goalYear}" required><br><br>
-
-  <label for="be">Be（どうなりたいか）：</label><br>
-  <textarea name="be" id="be" rows="3" cols="50" th:text="${goal.be}" required></textarea><br><br>
-
-  <label for="what">What（何を達成したいか）：</label><br>
-  <textarea name="what" id="what" rows="3" cols="50" th:text="${goal.what}" required></textarea><br><br>
-
-  <button type="submit">更新する</button>
-</form>
-
-<br>
-<a th:href="@{/goals/year}">戻る</a>
-
-</body>
-</html>
+<th:block th:replace="fragments/layout :: layout('年間目標の編集', ~{::section})">
+  <section>
+    <h2>年間目標の編集</h2>
+    <form th:action="@{/goals/yearly}" th:object="${newYearlyGoal}" method="post" class="card">
+      <input type="hidden" th:field="*{id}">
+      <label>年 <input type="number" th:field="*{goalYear}" min="2000" max="2100"></label><br>
+      <label>Be <input type="text" th:field="*{be}" style="width:100%"></label><br>
+      <label>What <input type="text" th:field="*{what}" style="width:100%"></label><br>
+      <button class="btn" type="submit">保存</button>
+    </form>
+  </section>
+</th:block>

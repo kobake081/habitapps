@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title th:text="${pageTitle} ?: 'Habit App'">Habit App</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<th:block th:fragment="layout(pageTitle, content)">
+    <div class="wrap">
+        <header>
+            <div class="brand">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="#6366f1"><path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2zm1 15h-2v-2h2zm0-4h-2V7h2z"/></svg>
+                <div>
+                    <h1>Habit App</h1>
+                    <div class="sub">年間 → 四半期 → 月間 → 今日 をつないで、目標を日々の行動へ。</div>
+                </div>
+            </div>
+            <nav>
+                <a th:href="@{/}">ホーム</a>
+                <a th:href="@{/goals/yearly}">年間目標</a>
+                <a th:href="@{/today}">今日</a>
+            </nav>
+        </header>
+
+        <main th:replace="${content}">コンテンツ</main>
+
+        <footer>
+            <div>© 2025 Habit App</div>
+        </footer>
+    </div>
+</th:block>
+</body>
+</html>

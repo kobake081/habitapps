@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>履歴一覧</title>
-</head>
-<body>
-<h1>📅 過去の記録</h1>
-
-<ul>
-    <li th:each="date : ${dates}">
-        <a th:href="@{'/history/' + ${date}}" th:text="${date}"></a>
-    </li>
-</ul>
-
-<p><a href="/">今日のやることに戻る</a></p>
-</body>
-</html>
+<th:block th:replace="fragments/layout :: layout('履歴', ~{::section})">
+    <section>
+        <h2>過去の履歴</h2>
+        <!-- 履歴のテーブルなど好きに -->
+        <p class="sub">ここに履歴を表示していきます。</p>
+    </section>
+</th:block>

@@ -1,54 +1,29 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>四半期目標</title>
-    <meta charset="UTF-8">
-</head>
-<body>
+<th:block th:replace="fragments/layout :: layout('四半期目標', ~{::section})">
+    <section>
+        <h2 th:text="'『' + ${yearlyGoal.goalYear} + '年』の四半期目標'">四半期目標</h2>
 
-<h1 th:text="'『' + ${yearlyGoal.goalYear} + '年』の四半期目標'">四半期目標</h1>
+        <table class="table">
+            <thead>
+            <tr><th>ID</th><th>Quarter</th><th>Goal</th><th>操作</th></tr>
+            </thead>
+            <tbody>
+            <tr th:each="q : ${quarterlyGoals}">
+                <td th:text="${q.id}">1</td>
+                <td th:text="${q.quarter}">Q1</td>
+                <td th:text="${q.goal}">目標</td>
+                <td><a class="btn secondary" th:href="@{'/goals/quarterly/' + ${q.id} + '/monthly'}">月間目標へ</a></td>
+            </tr>
+            </tbody>
+        </table>
 
-<!-- 年間目標の概要 -->
-<section>
-    <h2>年間目標</h2>
-    <ul>
-        <li><strong>Be（どうなりたいか）:</strong> <span th:text="${yearlyGoal.be}">内面的な目標</span></li>
-        <li><strong>What（達成したいこと）:</strong> <span th:text="${yearlyGoal.what}">外的な成果</span></li>
-    </ul>
-</section>
+        <h3 style="margin:22px 0 10px">新規追加</h3>
+        <form th:action="@{'/goals/yearly/' + ${yearlyGoal.id} + '/quarterly'}"
+              th:object="${newQuarterlyGoal}" method="post" class="card">
+            <label>Quarter <input type="number" th:field="*{quarter}" min="1" max="4"></label><br>
+            <label>Goal <input type="text" th:field="*{goal}" style="width:100%"></label><br>
+            <button class="btn" type="submit">追加</button>
+        </form>
 
-<!-- 四半期目標一覧 -->
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Quarter</th>
-        <th>Goal</th>
-        <th>操作</th>
-    </tr>
-    <tr th:each="goal : ${quarterlyGoals}">
-        <td th:text="${goal.id}">1</td>
-        <td th:text="${goal.quarter}">Q1</td>
-        <td th:text="${goal.goal}">目標内容</td>
-        <td>
-            <a th:href="@{'/goals/quarterly/' + ${goal.id} + '/monthly'}">月間目標へ</a>
-        </td>
-    </tr>
-</table>
-
-<!-- 四半期目標追加フォーム -->
-<h2>新しい四半期目標を追加</h2>
-<form th:action="@{'/goals/yearly/' + ${yearlyGoal.id} + '/quarterly'}"
-      th:object="${newQuarterlyGoal}" method="post">
-    <label>Quarter:
-        <input type="number" th:field="*{quarter}" min="1" max="4"/>
-    </label><br/>
-    <label>Goal:
-        <input type="text" th:field="*{goal}"/>
-    </label><br/>
-    <button type="submit">追加</button>
-</form>
-
-<p><a th:href="@{/goals/yearly}">← 年間目標一覧へ戻る</a></p>
-
-</body>
-</html>
+        <p style="margin-top:18px"><a th:href="@{/goals/yearly}">← 年間目標一覧へ戻る</a></p>
+    </section>
+</th:block>
